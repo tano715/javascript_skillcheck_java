@@ -1,5 +1,7 @@
 package in.tech_camp.javascript_skillcheck_java.controller;
 
+import org.apache.catalina.connector.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +27,10 @@ public class ArticleController {
   }
 
   @PostMapping("/articles")
-  public String saveArticle(@ModelAttribute("articleForm") ArticleForm form){
-    ArticleEntity article = new ArticleEntity();
+  public  ResponseEntity<ArticleEntity> sabeArticle(@ModelAttribute("articleForm") ArticleForm form){
+   ArticleEntity article = new ArticleEntity();
     article.setText(form.getText());
     articleRepository.insert(article);
-    return "redirect:/";
+    return ResponseEntity.ok(article);
   }
 }
